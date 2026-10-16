@@ -1004,6 +1004,10 @@ private fun ProviderEditorDialog(
                 KeyValueEditor(stringResource(R.string.settings_default_headers), p.defaultHeaders) {
                     p = p.copy(defaultHeaders = it)
                 }
+                // Lyra Code: Provider 级能力开关（CapabilityResolver 取 Provider 与 Profile 的能力交集，
+                // 此前没有任何 UI 能打开 Provider 的 vision/imageInput，导致 VISION 角色恒定解析失败）
+                Text(stringResource(R.string.model_capabilities), style = MaterialTheme.typography.labelMedium)
+                CapabilityEditor(p.capabilities) { p = p.copy(capabilities = it) }
             }
         }
     )

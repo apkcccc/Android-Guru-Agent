@@ -101,6 +101,8 @@ class SettingsRepository @Inject constructor(
         provs = migrateAndHydrateApiKeys(provs)
         migrateLegacyConfig(profs, provs) { newProvs -> provs = newProvs }
         provs = migrateAndHydrateApiKeys(provs)
+        provs = migrateVisionCapabilities(provs)
+        profs = migrateProfileVision(profs).toMutableList()
         _providers.value = provs
         _profiles.value = profs
         _roles.value = readRoles(profs) ?: ModelProfileDefaults.defaultRoles(profs)
@@ -295,6 +297,23 @@ class SettingsRepository @Inject constructor(
 
     private fun persistProviders() =
         prefs.edit().putString(KEY_PROVIDERS, json.encodeToString(providersForPersist())).apply()
+
+    // Lyra Code fix: make Provider-level vision/imageInput reachable, then backfill
+    private fun migrateVisionCapabilities(provs: List<ProviderConfig>): List<ProviderConfig> =
+        provs.map { p ->
+            // user-created endpoint (non-builtin, or the custom_openai seed) that has a Base URL
+            val userEndpoint = !p.isBuiltIn || p.id == "custom_openai"
+            if (userEndpoint && p.baseUrl.isNotBlank() && !p.capabilities.vision) {
+                p.copy(capabilities = p.capabilities.copy(vision = true, imageInput = true))
+            } else p
+        }
+
+    private fun migrateProfileVision(profs: List<ModelProfile>): List<ModelProfile> =
+        profs.map { p ->
+            if (p.capabilities.imageInput && !p.capabilities.vision) {
+                p.copy(capabilities = p.capabilities.copy(vision = true))
+            } else p
+        }
 
     private fun persistRoles() =
         prefs.edit().putString(KEY_ROLES, json.encodeToString(_roles.value)).apply()

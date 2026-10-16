@@ -819,7 +819,7 @@ private fun AvailableModelsDialog(
  * 含上游（PR #125）新增的多模态输出能力位 ImageGen / VideoGen。
  */
 @Composable
-private fun CapabilityEditor(caps: ModelCapabilities, onChange: (ModelCapabilities) -> Unit) {
+internal fun CapabilityEditor(caps: ModelCapabilities, onChange: (ModelCapabilities) -> Unit) {
     LazyRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
         item { FilterChip(selected = caps.text, onClick = { onChange(caps.copy(text = !caps.text)) }, label = { Text("Text") }) }
         item { FilterChip(selected = caps.vision, onClick = { onChange(caps.copy(vision = !caps.vision)) }, label = { Text("Vision") }) }

@@ -252,38 +252,38 @@ object ModelProfileDefaults {
 
     val builtInProviders: List<ProviderConfig> = listOf(
         provider("openai", "OpenAI", "https://api.openai.com/v1",
-            ModelCapabilities(text = true, vision = true, toolCalling = true,
+            ModelCapabilities(text = true, vision = true, imageInput = true, toolCalling = true,
                 structuredOutput = true, streaming = true, reasoning = true, jsonMode = true, longContext = true)),
         provider("anthropic", "Anthropic", "https://api.anthropic.com/v1",
-            ModelCapabilities(text = true, vision = true, toolCalling = true, streaming = true, reasoning = true, longContext = true)),
+            ModelCapabilities(text = true, vision = true, imageInput = true, toolCalling = true, streaming = true, reasoning = true, longContext = true)),
         provider("google", "Google Gemini", "https://generativelanguage.googleapis.com/v1beta/openai",
-            ModelCapabilities(text = true, vision = true, toolCalling = true, structuredOutput = true, streaming = true, reasoning = true, longContext = true)),
+            ModelCapabilities(text = true, vision = true, imageInput = true, toolCalling = true, structuredOutput = true, streaming = true, reasoning = true, longContext = true)),
         provider("deepseek", "DeepSeek", "https://api.deepseek.com/v1",
             ModelCapabilities(text = true, toolCalling = true, streaming = true, reasoning = true)),
         provider("openrouter", "OpenRouter", "https://openrouter.ai/api/v1",
-            ModelCapabilities(text = true, vision = true, toolCalling = true, structuredOutput = true, streaming = true, reasoning = true, longContext = true)),
+            ModelCapabilities(text = true, vision = true, imageInput = true, toolCalling = true, structuredOutput = true, streaming = true, reasoning = true, longContext = true)),
         provider("ollama", "Ollama（本机 / 局域网）", "http://localhost:11434/v1",
-            ModelCapabilities(text = true, vision = true, toolCalling = true, streaming = true)),
+            ModelCapabilities(text = true, vision = true, imageInput = true, toolCalling = true, streaming = true)),
         provider("lmstudio", "LM Studio", "http://localhost:1234/v1",
-            ModelCapabilities(text = true, vision = true, toolCalling = true, streaming = true)),
+            ModelCapabilities(text = true, vision = true, imageInput = true, toolCalling = true, streaming = true)),
         provider("vllm", "vLLM", "http://localhost:8000/v1",
             ModelCapabilities(text = true, toolCalling = true, streaming = true)),
 
         // ── 国内 / 海外常用 OpenAI 兼容中转（URL 均为官方公开的兼容端点）──────────
         provider("siliconflow", "硅基流动 SiliconFlow", "https://api.siliconflow.cn/v1",
-            ModelCapabilities(text = true, vision = true, toolCalling = true, streaming = true, reasoning = true, longContext = true)),
+            ModelCapabilities(text = true, vision = true, imageInput = true, toolCalling = true, streaming = true, reasoning = true, longContext = true)),
         provider("zhipu", "智谱 GLM", "https://open.bigmodel.cn/api/paas/v4",
-            ModelCapabilities(text = true, vision = true, toolCalling = true, streaming = true, reasoning = true)),
+            ModelCapabilities(text = true, vision = true, imageInput = true, toolCalling = true, streaming = true, reasoning = true)),
         provider("moonshot", "Moonshot Kimi", "https://api.moonshot.cn/v1",
             ModelCapabilities(text = true, toolCalling = true, streaming = true)),
         provider("dashscope", "阿里百炼 DashScope", "https://dashscope.aliyuncs.com/compatible-mode/v1",
-            ModelCapabilities(text = true, vision = true, toolCalling = true, streaming = true, reasoning = true, longContext = true)),
+            ModelCapabilities(text = true, vision = true, imageInput = true, toolCalling = true, streaming = true, reasoning = true, longContext = true)),
         provider("volcark", "火山方舟 Ark", "https://ark.cn-beijing.volces.com/api/v3",
-            ModelCapabilities(text = true, vision = true, toolCalling = true, streaming = true, reasoning = true)),
+            ModelCapabilities(text = true, vision = true, imageInput = true, toolCalling = true, streaming = true, reasoning = true)),
         provider("hunyuan", "腾讯混元", "https://api.hunyuan.cloud.tencent.com/v1",
             ModelCapabilities(text = true, toolCalling = true, streaming = true, reasoning = true)),
         provider("xai", "xAI Grok", "https://api.x.ai/v1",
-            ModelCapabilities(text = true, vision = true, toolCalling = true, streaming = true, reasoning = true)),
+            ModelCapabilities(text = true, vision = true, imageInput = true, toolCalling = true, streaming = true, reasoning = true)),
         provider("groq", "Groq", "https://api.groq.com/openai/v1",
             ModelCapabilities(text = true, toolCalling = true, structuredOutput = true, streaming = true, reasoning = true)),
 
@@ -323,7 +323,7 @@ object ModelProfileDefaults {
             list += ModelProfile(
                 id = "default-local", name = "Local (Ollama)", providerId = it.id,
                 modelId = "qwen2.5:7b", topK = 40, minP = 0.05f, repetitionPenalty = 1.1f,
-                capabilities = ModelCapabilities(text = true, vision = true, toolCalling = true, streaming = true),
+                capabilities = ModelCapabilities(text = true, vision = true, imageInput = true, toolCalling = true, streaming = true),
             )
         }
         return list
